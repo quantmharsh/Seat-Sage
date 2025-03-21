@@ -1,4 +1,4 @@
-
+"use client"
 import { useUser } from '@clerk/nextjs'
 import { useMutation } from 'convex/react';
 import React, { useEffect } from 'react'

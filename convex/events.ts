@@ -36,7 +36,7 @@ export const getEventAvaliability=query({
         .collect()
         .then((tickets)=>tickets.filter((t)=>t.status==TICKET_STATUS.VALID || t.status==TICKET_STATUS.USED).length);
 
-        //count current va;id offers
+        //count current valid offers
         //users  those who have reserved tickets but havnt paid till now
 
         const now= Date.now();

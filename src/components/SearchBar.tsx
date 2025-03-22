@@ -1,6 +1,6 @@
 import React from 'react'
 import Form from "next/form";
-import { SearchFilter } from 'convex/server';
+
 import { SearchSlash } from 'lucide-react';
 import { Button } from './ui/button';
 

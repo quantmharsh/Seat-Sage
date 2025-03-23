@@ -43,7 +43,7 @@ export const getEventAvaliability=query({
         const activeOffers=await ctx.db.query("waitingList").withIndex('by_event_status', (q)=>q.eq("eventId",eventId).eq("status",WAITING_LIST_STATUS.OFFERED))
         .collect()
         .then(
-            (entries)=>entries.filter((e)=>e.offerExpiresAt ?? 0 > now).length
+            (entries)=>entries.filter((e)=>e.offerExpiresAt ?? 0 > now).length   
         );
 
         const totalReserved=purchasedCount+activeOffers;

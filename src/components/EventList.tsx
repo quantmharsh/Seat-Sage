@@ -7,11 +7,12 @@ import { ifError } from 'assert'
 import Spinner from './Spinner'
 import { CalendarDays, Ticket } from 'lucide-react'
 import EventCard from './EventCard'
+import { toast } from 'sonner'
 
 type Props = {}
 
 const EventList = (props: Props) => {
-
+        
     const events= useQuery(api.events.get);
     if(!events)
     {

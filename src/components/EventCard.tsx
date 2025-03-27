@@ -8,6 +8,7 @@ import { api } from '../../convex/_generated/api';
 import { useStorageUrl } from '@/lib/imageUrl';
 import Image from 'next/image';
 import { CalendarDays, CheckCircle, CircleArrowRight, LoaderCircleIcon, MapPin, PencilIcon, StarIcon, TicketsPlane, XCircle } from 'lucide-react';
+import PurchaseTicket from './PurchaseTicket';
 
 
 type Props = {}
@@ -138,8 +139,8 @@ router.push(`/seller/events/${eventId}/edit`);
     return (
       <div className="mt-4">
         {queuePosition.status === "offered" && (
-          // <PurchaseTicket eventId={eventId} />
-         "ok"
+          <PurchaseTicket eventId={eventId} />
+        
         )}
         {renderQueuePosition()}
         {queuePosition.status === "expired" && (

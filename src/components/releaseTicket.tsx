@@ -6,7 +6,7 @@ import { XCircle } from 'lucide-react'
 
 type Props = {}
 
-const releaseTicket = ({eventId , waitingListId}:{
+const ReleaseTicket = ({eventId , waitingListId}:{
     eventId:Id<"events"> ,
     waitingListId:Id<"waitingList">
 }) => {
@@ -43,4 +43,4 @@ const releaseTicket = ({eventId , waitingListId}:{
   )
 }
 
-export default releaseTicket
+export default ReleaseTicket

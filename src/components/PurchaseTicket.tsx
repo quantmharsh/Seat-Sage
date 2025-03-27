@@ -5,7 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Ticket } from "lucide-react";
-import ReleaseTicket from "./releaseTicket";
+import ReleaseTicket from "./ReleaseTicket";
 
 type Props = {};
 

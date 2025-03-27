@@ -11,7 +11,7 @@ import { CalendarDays, CheckCircle, CircleArrowRight, LoaderCircleIcon, MapPin, 
 import PurchaseTicket from './PurchaseTicket';
 
 
-type Props = {}
+
 
 const EventCard = ({eventId}:{
     eventId:Id<"events">

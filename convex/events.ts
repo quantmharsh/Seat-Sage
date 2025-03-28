@@ -11,8 +11,8 @@ import { Id } from "./_generated/dataModel";
 const rateLimiter= new RateLimiter(components.rateLimiter, {
     queueJoin:{
         kind:"fixed window",
-        rate:3 ,
-        period:30*MINUTE  , //30 minutes 3  request
+        rate:50 ,
+        period:MINUTE  , //30 minutes 3  request
     }
 })
 
@@ -147,12 +147,13 @@ if(!event)
     status:WAITING_LIST_STATUS.WAITING
    });
 
-   return {
+   
+ }
+ return {
     success:true ,
     status:!isSoldOut? WAITING_LIST_STATUS.OFFERED :WAITING_LIST_STATUS.WAITING ,
     message:!isSoldOut ? "Ticket offered - you have 30 minutes to purchase":"Added to waiting list - you'll  be notified when a ticket becomes available", 
    };
- }
     
     }
 

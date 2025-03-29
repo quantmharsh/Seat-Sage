@@ -12,7 +12,7 @@ const rateLimiter= new RateLimiter(components.rateLimiter, {
     queueJoin:{
         kind:"fixed window",
         rate:50 ,
-        period:MINUTE  , //30 minutes 3  request
+        period:30* MINUTE  , //30 minutes 3  request
     }
 })
 

@@ -98,11 +98,11 @@ const JoinQueue = ({eventId , userId}:{
             ):isPastEvent ?(
                 <div className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gray-100 text-gray-500 rounded-lg cursor-not-allowed">
                 <Clock className="w-5 h-5" />
-                <span>Event has ended</span>
+                <span>Event has ended ☹️</span>
               </div>
             ): availability.purchasedCount >=availability?.totalTickets ? (  <div className="text-center p-4">
                 <p className="text-lg font-semibold text-red-600">
-                  Sorry, this event is sold out
+                  Sorry, this event is sold out 🥲
                 </p>
               </div>):( <button
               onClick={handleJoinQueue}

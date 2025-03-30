@@ -25,7 +25,7 @@ const SyncUserWithConvex = (props: Props) => {
                     email:user.emailAddresses[0]?.emailAddress ?? "",
                 })
             } catch (error) {
-                console.error("Error synching with user:",error);
+                console.error("Error synching clerk user with Convex:",error);
             }
         }
         syncUser();

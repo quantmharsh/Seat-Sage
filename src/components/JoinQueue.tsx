@@ -68,7 +68,7 @@ const JoinQueue = ({eventId , userId}:{
                 console.error("Error joining waiting list:" ,error);
                 toast.error('Uh oh! Something went wrong',
                     {
-                        description:"Failed to join queue. please tryy again later",
+                        description:"Failed to join queue. please try again later",
                         duration:5000,
                         
                     }

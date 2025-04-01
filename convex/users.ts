@@ -42,3 +42,28 @@ export const getUserById=query({
         return user;
     },
 });
+
+
+
+//create stripeConnectId for seller. it will be used  to transfer money into event organiser . 
+export const updateOrCreateUserStripeConnectId= mutation({
+    args:{
+        userId:v.string() ,
+        stripeConnectId:v.string()
+    },
+        handler:async(ctx , {userId , stripeConnectId})=>{
+            //get user
+            const user= await ctx.db.query("users").withIndex("by_user_id" , (q)=>q.eq("userId", userId)).first();
+
+            if(!user)
+            {
+                throw new Error("User not found");
+            }
+
+            //update  stripeConnectId
+            await ctx.db.patch(user._id ,{
+                stripeConnectId:stripeConnectId
+            });
+
+    }
+}) 

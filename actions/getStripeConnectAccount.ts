@@ -11,7 +11,7 @@ if(!process.env.NEXT_PUBLIC_CONVEX_URL)
 }
 const convex= new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL);
 
-
+//get Stripe connect Id from db  ;
 export  async function getStripeConnectAccount(){
 
     const {userId}= await  auth();

@@ -9,6 +9,8 @@ import Spinner from './Spinner';
 import { createStripeConnectLoginLink } from '../../actions/createStripeConnectLoginLink';
 import Link from 'next/link';
 import { BookPlusIcon, CalendarHeart } from 'lucide-react';
+import { Button } from './ui/button';
+import { createStripeConnectCustomer } from '../../actions/createStripeConnectCustomer';
 
 type Props = {}
 
@@ -72,7 +74,7 @@ const SellerDashboard = (props: Props) => {
             </p>
           </div>
           {/* Main Content */}
-          {!isReadyToAcceptPayments && (
+          {isReadyToAcceptPayments && (
             <>
             <div className='bg-white p-8 rounded-lg'>
               <h2 className='text-2xl font-semibold text-gray-900 mb-6'>
@@ -104,6 +106,38 @@ const SellerDashboard = (props: Props) => {
            
             </>
           )}
+          <div className='p-6'>
+          {/* Account creation section */}
+            {!stripeConnectId && !accountCreatePending && (
+              <div className='text-center py-8'>
+                <h3 className='text-xl font-semibold mb-4'>
+                  Start Accepting Payments
+                </h3>
+                <p className='text-gray-600 mb-6 '>
+                  Create your seller account to start receiving payments securely through Stripe
+                </p>
+                <Button
+                  onClick={async()=>{
+                    setAccountCreatePending(true);
+                    setError(false);
+                    try {
+                      await createStripeConnectCustomer();
+                      setAccountCreatePending(false);
+                    } catch (error) {
+                      console.error("Error creating Stripe Connect customer:",error);
+                      setAccountCreatePending(false);
+                      setError(true);
+                    }
+                  }}
+                  className=' bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors'
+                >
+                  Create Seller Account
+                </Button>
+                </div>
+            )}
+            {/* Account Status Section  */}
+            {}
+          </div>
 
         </div>
 

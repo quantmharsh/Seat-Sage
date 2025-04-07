@@ -7,6 +7,8 @@ import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import Spinner from './Spinner';
 import { createStripeConnectLoginLink } from '../../actions/createStripeConnectLoginLink';
+import Link from 'next/link';
+import { BookPlusIcon, CalendarHeart } from 'lucide-react';
 
 type Props = {}
 
@@ -65,10 +67,43 @@ const SellerDashboard = (props: Props) => {
             <h2 className='text-2xl font-bold '>
       Seller Dashboard
             </h2>
-            <p>
+            <p className='text-blue-100 font-semibold  mt-2'>
       Manage your seller profile and payment settings
             </p>
           </div>
+          {/* Main Content */}
+          {!isReadyToAcceptPayments && (
+            <>
+            <div className='bg-white p-8 rounded-lg'>
+              <h2 className='text-2xl font-semibold text-gray-900 mb-6'>
+                Sell tickets for your event
+              </h2>
+              <p className='text-gray-600 mb-8'>
+                List your tickets for sale and manage your listings
+              </p>
+              <div className='bg-white rounded-xl shadow-sm border border-blue-200 p-4'>
+                <div className='flex justify-center gap-4'>
+                  <Link href="/seller/new-event"
+                    className='flex items-center gap-2 bg-blue-600  text-amber-50 px-4 py-2 rounded-lg  hover:bg-blue-700 transition-colors'
+                  >
+
+                    <BookPlusIcon className='w-5 h-5'/>
+                    Create Event
+                  </Link>
+                  <Link href="/seller/events"
+                    className='flex items-center gap-2 bg-gray-100 text-gray-700  px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors'
+                  >
+                    <CalendarHeart/> View My Events
+                  </Link>
+                </div>
+              </div>
+            </div>
+           
+            <hr className='my-8  border-blue-200 '/>
+           
+           
+            </>
+          )}
 
         </div>
 

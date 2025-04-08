@@ -42,7 +42,7 @@ export async function createStripeConnectCustomer(){
     });
 
     await convex.mutation(api.users.updateOrCreateUserStripeConnectId, {
-        userId,
+        userId, 
         stripeConnectId: account.id,
     });
     return {account:account.id};

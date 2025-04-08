@@ -141,11 +141,20 @@ const SellerDashboard = (props: Props) => {
             )}
             {/* Account Status Section  */}
             {stripeConnectId && accountStatus &&(
-              <div>
+              <div className='space-y-6'>
                 {/* Status Cards */}
-                <div>
+                <div className='grid grid-cols-1 md:grid-cols-2  gap-4'>
                   {/* Account Status Card */}
-                  <div>
+                  <div className='bg-gray-50 rounded-lg p-4'>
+                    <h3 className='text-sm font-medium text-gray-500'>
+                      Account Status
+                    </h3>
+                    <div className='mt-2 flex items-center'>
+                      <div className={`w-3 h-3 rounded-full mr-2 ${accountStatus.isActive ?"bg-green-500":"bg-yellow-500"}`}/>
+                     <span className="text-lg font-semibold">
+                      {accountStatus.isActive?"Active":"Pending Setup"}
+                     </span>
+                      </div>
                     </div>
                   </div>
                 </div>

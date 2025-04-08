@@ -291,9 +291,21 @@ const SellerDashboard = (props: Props) => {
                 </div>
               )}
 
+
             </div>
           )}
-          
+              {/* Loading States */}
+              {accountCreatePending && (
+            <div className="text-center py-4 text-gray-600">
+              Creating your seller account...
+            </div>
+          )}
+          {accountLinkCreatePending && (
+            <div className="text-center py-4 text-gray-600">
+              Preparing account setup...
+            </div>
+          )}
+
         </div>
 
       </div>

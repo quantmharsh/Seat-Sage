@@ -8,7 +8,7 @@ import { api } from '../../convex/_generated/api';
 import Spinner from './Spinner';
 import { createStripeConnectLoginLink } from '../../actions/createStripeConnectLoginLink';
 import Link from 'next/link';
-import { BookPlusIcon, CalendarHeart } from 'lucide-react';
+import { BookPlusIcon, CalendarHeart, Cog } from 'lucide-react';
 import { Button } from './ui/button';
 import { createStripeConnectCustomer } from '../../actions/createStripeConnectCustomer';
 import { createStripeConnectAccountLink } from '../../actions/createStripeConnectAccountLink';
@@ -266,9 +266,34 @@ const SellerDashboard = (props: Props) => {
                   )}
                 </div>
               )}    
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-3 mt-6">
+                {accountStatus.isActive && (
+                  <button
+                    onClick={handleManageAccount}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+                  >
+                    <Cog className="w-4 h-4 mr-2" />
+                    Seller Dashboard
+                  </button>
+                )}
+                <button
+                  onClick={fetchAccountStatus}
+                  className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  Refresh Status
+                </button>
+              </div>
+              {error && (
+                <div className="mt-4 bg-red-50 text-red-600 p-3 rounded-lg">
+                  Unable to access Stripe dashboard. Please complete all
+                  requirements first.
+                </div>
+              )}
 
             </div>
           )}
+          
         </div>
 
       </div>

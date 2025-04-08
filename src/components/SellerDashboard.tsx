@@ -28,21 +28,25 @@ const SellerDashboard = (props: Props) => {
   });
   const isReadyToAcceptPayments=accountStatus?.isActive && accountStatus?.payoutsEnabled;
   useEffect(()=>{
+   
     if(stripeConnectId)
     {
     fetchAccountStatus();
     }
+    console.log("No Stripe Connect Id");
   },[stripeConnectId]);
   if(stripeConnectId===undefined)
   {
     return <Spinner/>;
   }
   const fetchAccountStatus=async()=>{
+  
     if(stripeConnectId)
     {
       try {
         const status= await  getStripeConnectAccountStatus(stripeConnectId);
         setAccountStatus(status);
+        console.log("Fetched Account Status" ,status);
       } catch (error) {
         console.error("Error fetching account status:");
       }
@@ -136,7 +140,16 @@ const SellerDashboard = (props: Props) => {
                 </div>
             )}
             {/* Account Status Section  */}
-            {}
+            {stripeConnectId && accountStatus &&(
+              <div>
+                {/* Status Cards */}
+                <div>
+                  {/* Account Status Card */}
+                  <div>
+                    </div>
+                  </div>
+                </div>
+            )}
           </div>
 
         </div>

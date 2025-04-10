@@ -185,3 +185,37 @@ export const create=mutation({
         return eventId;
     }
 })
+
+//Update Event
+export const updateEvent=mutation({
+    args:{
+        eventId:v.id("events"),
+        name:v.string(),
+        description:v.string(),
+        location:v.string(),
+        eventDate:v.number(),
+        price:v.number(),
+        totalTickets:v.number(),
+
+    },
+    handler:async(ctx , args)=>{
+        const {eventId , ...updates}=args;
+        //get current event to check tickets sold
+        const event=await ctx.db.get(eventId);
+        if(!event)
+        {
+            throw new Error("Event  not found");
+        }
+        //get total tickets sold out for event
+        const soldTickets=await ctx.db.query("tickets").withIndex("by_event",(q)=>q.eq("eventId" ,eventId)).filter((q)=>q.or(q.eq(q.field("status") ,"valid"), q.eq(q.field("status"),'used'))).collect();
+        //Ensure new total tickets is not less than sold tickets
+        if(updates.totalTickets <soldTickets.length)
+        {
+            throw new Error(`Cannot reduce total tickets below ${soldTickets.length}(number of tickets already sold)`);
+        }
+        //update in db
+        await ctx.db.patch(eventId ,updates);
+        return eventId;
+
+    }
+})

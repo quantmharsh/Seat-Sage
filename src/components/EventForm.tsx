@@ -11,6 +11,7 @@ import { useSonner } from "sonner";
 import { toast } from 'sonner'
 import { useStorageUrl } from "@/lib/imageUrl";
 import { init } from "next/dist/compiled/webpack/webpack";
+import { useForm } from "react-hook-form";
 const formSchema=z.object({
     name:z.string().min(5 ,"Event name is required"),
     description:z.string().min(10 , "Description is required"),
@@ -19,7 +20,7 @@ const formSchema=z.object({
     price:z.number().min(0 ,"Price must be 0 or greater"),
     totalTickets:z.number().min(1 ,"Must have at least 1 ticket"),
 });
-type formData=z.infer<typeof formSchema>;
+type FormData=z.infer<typeof formSchema>;
 
 interface InitialEventData{
     _id:Id<"events">;
@@ -57,8 +58,22 @@ const EventForm = ({mode , initialData}:EventFormProps) => {
     const updateEventImage=useMutation(api.storage.updateEventImage);
     const deleteImage=useMutation(api.storage.deleteImage);
 
+    const form =useForm<FormData>({
+        resolver:zodResolver(formSchema),
+        defaultValues:{
+            name:initialData?.name??"",
+            description:initialData?.description ??"",
+            location:initialData?.location ??"",
+            eventDate:initialData? new Date(initialData.eventDate): new Date(),
+            price:initialData?.price ?? 0 ,
+            totalTickets:initialData?.totalTickets ?? 1,
+        }
+
+
+    });
+
   return (
-    <div>EventForm</div>
+    <div>EventForm</div>  
   )
 }
 

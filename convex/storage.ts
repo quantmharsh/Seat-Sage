@@ -38,4 +38,8 @@ export const  deleteImage=mutation({
     handler:async(ctx , {storageId})=>{
         await ctx.storage.delete(storageId);
     },
+
+
+
 });
+

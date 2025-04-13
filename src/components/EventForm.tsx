@@ -111,8 +111,97 @@ const EventForm = ({ mode, initialData }: EventFormProps) => {
 
 
      };
+    
 
+async function onSubmit(values:FormData){
 
+    if(!user?.id) return ;
+
+    startTransition(async()=>{
+        try {
+            let imageStorageId =null;
+            //handle image changes
+            //user selected new image
+            if(selectedImage)
+            {
+//upload new image   
+                imageStorageId=await handleImageUpload(selectedImage);
+
+            }
+
+            //Handle  image  deletion in edit mode
+            if(mode==="edit" && initialData?.imageStorageId)
+            {
+                if(removedCurrentImage || selectedImage)
+                {
+                    // delete old image from storage. if user has seleted new image or removed old image
+                    await deleteImage({
+                        storageId:initialData.imageStorageId
+                    });
+                }
+            }
+            if(mode==="create")
+            {
+                const eventId=await createEvent({
+                    ...values,
+                    userId:user.id ,
+                    eventDate:values.eventDate.getTime(),
+                });
+                //add event Image
+                if(imageStorageId)
+                {
+                    await updateEventImage({
+                        eventId ,
+                        storageId:imageStorageId as Id<"_storage">,
+                    });
+                }
+                router.push(`/event/${eventId}`);
+            }
+            //update event information   if in edit mode
+            else{
+                //ensure initialData exists before procceding with update
+                if(!initialData)
+                {
+                    throw new Error("Initial event data is required for updates");
+                }
+                //update event details
+                await updateEvent({
+                   eventId:initialData._id ,
+                    ...values ,
+                    eventDate:values.eventDate.getTime(),
+                });
+                //update image-this will now handle  adding new image ,above in if condition we were deleting the old image . to free up spaces .
+                if(imageStorageId || removedCurrentImage)
+                {
+                    await updateEventImage({
+                        eventId:initialData._id ,
+                        //if  having new image id pass it or otherwise passs null .
+                        storageId:imageStorageId? (imageStorageId as Id<'_storage'>) : null,
+                    })
+                }
+               toast.success('Event updated',
+                                  {
+                                      description:"your event has been successfully updated.",
+                                      duration:5000,
+                                      
+                                  })
+                                  router.push(`/event/${initialData._id}`);
+            }
+        } catch (error) {
+            console.error("Failed to handle event" ,error);
+             toast.error('Uh oh! something went wrong.',
+                                {
+                                    description:"There was a problem with your request.Please try again later",
+                                    duration:5000,
+                                    
+                                })
+
+            
+        }
+
+    })
+}
+     
     return (
         <div>EventForm</div>
     )

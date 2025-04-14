@@ -3,6 +3,7 @@ import SearchBar from './SearchBar'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from "@/images/logo.png";
+import logo1 from "@/images/logo1.png";
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import { Button } from './ui/button';
@@ -17,7 +18,7 @@ const Header = (props: Props) => {
  <Link href='/' className='font-bold shrink-0'>
 
  <Image
-   src={logo}
+   src={logo1}
    alt="logo"
    width={100}
    height={100}

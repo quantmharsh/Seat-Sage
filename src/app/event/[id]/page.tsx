@@ -40,7 +40,7 @@ const EventPage= () => {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
           <div className='bg-white rounded-xl shadow-sm overflow-hidden'>
           {imageUrl &&(
-          <div className=''>
+          <div className='aspect-[21/9] relative w-full'>
             <Image
            src={imageUrl}
            alt={event.name}

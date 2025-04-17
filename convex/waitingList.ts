@@ -40,7 +40,7 @@ q.eq(q.field("status"), WAITING_LIST_STATUS.OFFERED)))
  *Mutation to process the waiting list queue and offer tickets to next eligible users.
  checks current availabilty considering purchased tickets and active offers
  */
- async function processQueueImpl(
+ export async function processQueueImpl(
     ctx: MutationCtx,
     eventId: Id<"events">
   ): Promise<void> {

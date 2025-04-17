@@ -5,7 +5,7 @@ import RateLimiter, { MINUTE } from "@convex-dev/rate-limiter";
 import { api, components, internal } from "./_generated/api";
 import { RegisteredMutation } from "convex/server";
 import { Id } from "./_generated/dataModel";
-import { processQueue } from "./waitingList";
+import { processQueue, processQueueImpl } from "./waitingList";
 
 
 // Initialize rateLimiter
@@ -281,7 +281,8 @@ export const purchaseTicket = mutation(
                 status:WAITING_LIST_STATUS.PURCHASED,
               });
               //process queue for other people.
-              await processQueue(ctx ,args.eventId)
+              await processQueueImpl(ctx, args.eventId);
+
               console.log("Purchase ticket completed successfully");
             } catch (error) {
                 console.error("Failed to complete ticket purchase:" ,error);

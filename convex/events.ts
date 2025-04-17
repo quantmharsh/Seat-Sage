@@ -6,6 +6,7 @@ import { api, components, internal } from "./_generated/api";
 import { RegisteredMutation } from "convex/server";
 import { Id } from "./_generated/dataModel";
 import { processQueue, processQueueImpl } from "./waitingList";
+import { promise } from "zod";
 
 
 // Initialize rateLimiter
@@ -242,56 +243,80 @@ export const purchaseTicket = mutation(
                     "Invalid waiting list status - ticket offer may have expired"
                 );
             }
-            if(waitingListEntry.userId!==args.userId)
-            {
+            if (waitingListEntry.userId !== args.userId) {
                 console.error("User ID mismatch", {
-                    waitingListUserId: waitingListEntry.userId, 
-                    requestedUserId:args.userId,
+                    waitingListUserId: waitingListEntry.userId,
+                    requestedUserId: args.userId,
                 });
                 throw new Error("Waiting List entry does not belong to this user");
 
             }
             //verify that event exist or not and  is not cancelled
-            const event =await ctx.db.get(args.eventId);
-            if(!event)
-            {
-                console.error("Event not found" , args.eventId);
+            const event = await ctx.db.get(args.eventId);
+            if (!event) {
+                console.error("Event not found", args.eventId);
                 throw new Error("Event not found");
             }
-            if(event.is_cancelled)
-            {
-                console.error("Attempted purchase of cancelled event" ,args.eventId);
+            if (event.is_cancelled) {
+                console.error("Attempted purchase of cancelled event", args.eventId);
                 throw new Error("Event  is no longer active");
 
             }
             try {
-                console.log("creating ticket with payment info" , args.paymentInfo);
+                console.log("creating ticket with payment info", args.paymentInfo);
                 //create ticket with payment Info
-                await ctx.db.insert("tickets",{
-                    eventId:args.eventId , 
-                    userId:args.userId,
-                    purchasedAt:Date.now(),
-                    status:TICKET_STATUS.VALID,
-                    paymentIntentId:args.paymentInfo.paymentIntentId,
-                    amount:args.paymentInfo.amount
+                await ctx.db.insert("tickets", {
+                    eventId: args.eventId,
+                    userId: args.userId,
+                    purchasedAt: Date.now(),
+                    status: TICKET_STATUS.VALID,
+                    paymentIntentId: args.paymentInfo.paymentIntentId,
+                    amount: args.paymentInfo.amount
 
                 });
-              //now update waitingListStatus from offered to purchased
-              await ctx.db.patch(args.waitingListId ,{
-                status:WAITING_LIST_STATUS.PURCHASED,
-              });
-              //process queue for other people.
-              await processQueueImpl(ctx, args.eventId);
+                //now update waitingListStatus from offered to purchased
+                await ctx.db.patch(args.waitingListId, {
+                    status: WAITING_LIST_STATUS.PURCHASED,
+                });
+                //process queue for other people.
+                await processQueueImpl(ctx, args.eventId);
 
-              console.log("Purchase ticket completed successfully");
+                console.log("Purchase ticket completed successfully");
             } catch (error) {
-                console.error("Failed to complete ticket purchase:" ,error);
-                
+                console.error("Failed to complete ticket purchase:", error);
+
             }
 
 
 
 
 
+        }
+    })
+
+    //get users tickets with event information
+    //fetch all tickets of  user ,then fetcch  events for which those tickets are (2 db call , tickets ,then from tickets we are getting  all events details  )
+    export const getUserTickets=query({
+        args:{
+            userId:v.string() ,
+
+        },
+        handler:async(ctx , {userId})=>{
+            //get all tickets of user
+            const tickets=await ctx.db.query("tickets").withIndex("by_user",(q)=> q.eq("userId",userId)).collect();
+
+            //get all  events for  each user tickets
+            const ticketsWithEvents= await  Promise.all(
+                tickets.map(async(ticket)=>{
+                    const event=await ctx.db.get(ticket.eventId);
+                    return {
+                        ...ticket ,
+                        event
+                    };
+                })
+            );
+
+
+                return ticketsWithEvents;
         }
     })

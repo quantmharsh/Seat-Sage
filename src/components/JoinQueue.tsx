@@ -88,6 +88,8 @@ const JoinQueue = ({eventId , userId}:{
     const isPastEvent=event.eventDate <Date.now();
   return (
      <div>
+        {/* //render buy ticket if user is not in queue . 
+        //this will not rendered only when  WAITING_LIST_STATUS  is in waiting  */}
         {(!queuePositon || queuePositon.status===WAITING_LIST_STATUS.EXPIRED || (queuePositon.status===WAITING_LIST_STATUS.OFFERED && queuePositon.offerExpiresAt && queuePositon.offerExpiresAt <=Date.now())) && (
             <>
             {isEventOwner ?(

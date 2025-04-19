@@ -14,7 +14,7 @@ if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
 }
 const convex = getConvexClient();
 
-//function to create stripe account where sellers will manage their payment details. here sellers  account wiull be created on stripe .
+//function to create stripe account where sellers will manage their payment details. here sellers  account will be created on stripe .
 
 export async function createStripeConnectCustomer(){
 

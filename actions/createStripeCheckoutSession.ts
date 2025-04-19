@@ -76,6 +76,7 @@ export async function createStripeCheckoutSession({
                 quantity:1,
             },
         ],
+        // 1% Fees on each Trasaction
         payment_intent_data:{
             application_fee_amount:Math.round(event.price *100*0.01),
         },

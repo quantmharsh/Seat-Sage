@@ -17,6 +17,7 @@ export async function POST(req: Request) {
     let event: Stripe.Event;
 
     try {
+        //need to update stripe webhook secret everytime when we  
         console.log("Attempting to construct webhook Event");
         event = stripe.webhooks.constructEvent(
             body,

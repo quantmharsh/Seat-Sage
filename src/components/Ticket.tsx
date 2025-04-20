@@ -127,8 +127,38 @@ const Ticket = ({ ticketId }: { ticketId: Id<"tickets"> }) => {
                 </div>
 
                 {/* Additional Information */}
-                
+                <div>
+                    <h3>
+                        Important Information
+                    </h3>
+                    {ticket.event.is_cancelled ? (
+                          <p className="text-sm text-red-600">
+                          This event has been cancelled. A refund will be processed if it
+                          hasn&apos;t been already.
+                        </p>
+                    ):( <ul className="text-sm text-gray-600 space-y-1">
+              <li>• Please arrive at least 30 minutes before the event</li>
+              <li>• Have your ticket QR code ready for scanning</li>
+              <li>• This ticket is non-transferable</li>
+            </ul>)}
+                </div>
+
             </div>
+
+            {/* Ticket Footer */}
+            <div
+        className={`${ticket.event.is_cancelled ? "bg-red-50" : "bg-gray-50"} px-6 py-4 flex justify-between items-center`}
+      >
+        <span className="text-sm text-gray-500">
+          Purchase Date: {new Date(ticket.purchasedAt).toLocaleString()}
+        </span>
+        <span
+          className={`text-sm font-medium ${ticket.event.is_cancelled ? "text-red-600" : "text-blue-600"}`}
+        >
+          {ticket.event.is_cancelled ? "Cancelled" : "Valid Ticket"}
+        </span>
+      </div>
+
 
 
 

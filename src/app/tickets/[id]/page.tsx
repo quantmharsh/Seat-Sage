@@ -50,7 +50,58 @@ const page = (props: Props) => {
             throw new Error("Failed to download ticket", error as Error);
         }
     }
-    
+
+    const handleShare=async()=>{
+        if(!ticketRef.current)
+        {
+            return ;
+        }
+        // 1.) Try Sharing the image itself(Web Share API level  2)
+        if(navigator.canShare)
+        {
+            try {
+                const blob=await toBlob(ticketRef.current);
+                const file =new File([blob!], `ticket-${ticket._id}.png`,
+                    {
+                        type:blob!.type
+                    }
+                )
+                if(navigator.canShare({files:[file]}))
+                {
+                    await navigator.share({
+                        files:[file],
+                        title: "Guess who’s going? 👀",
+                        text: "Here’s my ticket for the big day—so excited!",
+                    });
+                    console.log("got files ")
+                    return ;
+                }
+                
+            } catch (error) {
+                console.warn("Share image failed, falling back to URL", error);
+            }
+        }
+        // 2. share just the page URL if  sharing file is not supported
+        if(navigator.share)
+        {
+            await navigator.share({
+                title: "Guess who’s going? 👀",
+                        text: "Here’s my ticket for the big day—so excited!",
+                        url:window.location.href,
+            });
+            console.log("Sharing only url");
+        }
+        //  3. Last option fallback: copy  URL to clipboard
+        else{
+                    try {
+                        await navigator.clipboard.writeText(window.location.href);
+                        alert("Link copied to clipboard!")
+                    } catch (error) {
+                        alert("Your browser does not support sharing.")
+                    }
+        }
+
+    };
     return (
         <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
@@ -71,7 +122,9 @@ const page = (props: Props) => {
                                 <Download className="w-4 h-4" />
                                 <span className="text-sm">Save</span>
                             </button>
-                            <button className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100">
+                            <button 
+                             onClick={handleShare}
+                            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100">
                                 <Share2 className="w-4 h-4" />
                                 <span className="text-sm">Share</span>
                             </button>

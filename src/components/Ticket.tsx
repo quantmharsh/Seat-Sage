@@ -62,7 +62,7 @@ const Ticket = ({ ticketId }: { ticketId: Id<"tickets"> }) => {
             </div>
             {/* Ticket Content */}
             <div className='p-6'>
-                <div className='grid grid-cols-2 gap-6'>
+                <div className='grid grid-cols-2  gap-6'>
                     {/* Left column -Event Details */}
                     <div className='space-y-4'>
                         <div className='flex items-center text-gray-600'>
@@ -115,7 +115,7 @@ const Ticket = ({ ticketId }: { ticketId: Id<"tickets"> }) => {
                     </div>
                     {/* Right Column -QR Code */}
                     <div className=' flex flex-col items-center  justify-center border-1 border-gray-200  pl-6'>
-                        <div className={`bg-gray-100 p-4 rounded-lg  ${ticket.event.is_cancelled ? "opacity-50" : ""} `}>
+                        <div className={`bg-gradient-to-r from-amber-400 to-amber-600 p-4 rounded-lg  ${ticket.event.is_cancelled ? "opacity-50" : ""} `}>
                             <QRCode value={ticket._id} className='w-32 h-32' />
 
                         </div>

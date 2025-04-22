@@ -133,12 +133,12 @@ const page = (props: Props) => {
 
                     {/* Event info */}
                     <div
-                        className={`bg-white p-6 rounded-lg shadow-sm border ${ticket.event.is_cancelled ? "border-red-200" : "border-gray-100"}`}
+                        className={`bg-gradient-to-r from-amber-400 to-amber-600 p-6 rounded-lg shadow-sm border ${ticket.event.is_cancelled ? "border-red-200" : "border-gray-100"}`}
                     >
                         <h1 className="text-2xl font-bold text-gray-900">
                             {ticket.event.name}
                         </h1>
-                        <p className="mt-1 text-gray-600">
+                        <p className="mt-1 text-gray-900">
                             {new Date(ticket.event.eventDate).toLocaleDateString()} at{" "}
                             {ticket.event.location}
                         </p>
@@ -151,7 +151,7 @@ const page = (props: Props) => {
                             >
                                 {ticket.event.is_cancelled ? "Cancelled" : "Valid Ticket"}
                             </span>
-                            <span className="text-sm text-gray-500">
+                            <span className="text-sm text-gray-900">
                                 Purchased on {new Date(ticket.purchasedAt).toLocaleDateString()}
                             </span>
                         </div>

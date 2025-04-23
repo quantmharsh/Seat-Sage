@@ -377,3 +377,38 @@ export const purchaseTicket = mutation(
             )
         }
     })
+
+
+
+    export const cancelEvent= mutation({args:{
+        eventId:v.id("events")
+    },
+        handler:async(ctx ,{eventId})=>{
+            const event =await ctx.db.get(eventId);
+            if(!event)
+            {
+                throw new Error("Event not found");
+            }
+            //get all vaid tickets for this event
+            const tickets=await ctx.db.query("tickets").withIndex("by_event" , (q)=>q.eq("eventId" ,eventId)).filter((q)=>q.or(q.eq(q.field("status") ,"valid") , q.eq(q.field("status") ,"used"))).collect();
+
+
+            if(tickets.length >0)
+            {
+                throw new Error("Cannot cancel event with active tickets. Please refund all tickets first.")
+            }
+            //mark event has cancelled
+            await ctx.db.patch(eventId,{
+                is_cancelled:true
+            });
+
+            //Delete any waitingList Entries
+            const waitingListEntries=await ctx.db.query("waitingList").withIndex("by_event_status",(q)=>q.eq("eventId" ,eventId)).collect();
+
+            for (const entry of waitingListEntries)
+            {
+                await ctx.db.delete(entry._id);
+            }
+            return {success:true};
+        }
+    })

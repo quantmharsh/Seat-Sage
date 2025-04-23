@@ -34,3 +34,17 @@ export const getTicketWithDetails = query({
         }
     }
 });
+
+
+export const getValidTicketsForEvent=query({
+    args:{
+        eventId:v.id("events")
+    },
+    handler:async(ctx ,{eventId})=>{
+
+        return await ctx.db.query("tickets").withIndex("by_event",(q)=>q.eq("eventId", eventId)).filter((q)=>q.or(q.eq(q.field("status") ,"used") ,q.eq(q.field('status'),"valid"))).collect();
+    }
+
+});
+
+

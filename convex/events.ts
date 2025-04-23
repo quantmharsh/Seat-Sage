@@ -411,4 +411,4 @@ export const purchaseTicket = mutation(
             }
             return {success:true};
         }
-    })
+    });

@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { query } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 
 
@@ -47,4 +47,20 @@ export const getValidTicketsForEvent=query({
 
 });
 
+export const updateTicketStatus=mutation({
+    args:{
+  ticketId:v.id("tickets"),
+  status: v.union(
+    v.literal("valid"),
+    v.literal("used"),
+    v.literal("refunded"),
+    v.literal("cancelled")
+  ),
+    },
+    handler:async(ctx , {ticketId ,status})=>{
 
+        await ctx.db.patch(ticketId ,{status})
+    }
+
+
+});

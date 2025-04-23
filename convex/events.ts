@@ -17,6 +17,12 @@ const rateLimiter = new RateLimiter(components.rateLimiter, {
         period: 30 * MINUTE, //30 minutes 3  request
     }
 })
+export type Metrics={
+    soldTickets:number ;
+    refundedTickets:number ;
+    cancelledTickets:number;
+    revenue:number;
+};
 
 export const get = query({
     args: {},
@@ -337,3 +343,37 @@ export const purchaseTicket = mutation(
         },
     });
     
+
+
+
+    export const  getSellerEvents=query({
+        args:{userId:v.string()},
+        handler:async(ctx ,{userId})=>{
+            //fetch all events 
+            const events=await ctx.db.query("events").filter((q)=>q.eq(q.field("userId") ,userId)).collect();
+
+            //for each event , get ticket sales data
+            const eventsWithMetrics=await Promise.all(
+                events.map(async(event)=>{
+                    const tickets=await ctx.db.query("tickets").withIndex("by_event",(q)=>q.eq("eventId" ,event._id)).collect();
+
+                    const validTickets=tickets.filter((t)=>t.status==='used' || t.status==="valid");
+
+                    const refundedTickets=tickets.filter((t)=>t.status==="refunded");
+                    const cancelledTickets=tickets.filter((t)=>t.status==="cancelled");
+
+                    const metrics:Metrics={
+                        soldTickets:validTickets.length,
+                        refundedTickets:refundedTickets.length,
+                        cancelledTickets:cancelledTickets.length,
+                        revenue:validTickets.length*event.price
+                    };
+                    return {
+                        ...event ,
+                        metrics,
+                    }
+                })
+               
+            )
+        }
+    })

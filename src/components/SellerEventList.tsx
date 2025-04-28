@@ -60,6 +60,8 @@ const SellerEventList = (props: Props) => {
 
 export default SellerEventList;
 
+
+// no need to create separate component for sellerEventCard 
 function SellerEventCard ({
   event,
 }:{

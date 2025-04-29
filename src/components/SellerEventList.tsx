@@ -40,6 +40,7 @@ const SellerEventList = (props: Props) => {
           )}
         </div>
       </div>
+      {/* Only rendered when past events exist */}
       {pastEvents.length >0 && (
         <div>
           <h2 className='text-2xl font-bold text-gray-900 mb-4'>

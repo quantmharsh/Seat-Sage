@@ -9,4 +9,4 @@ const CancelEventButton = ({eventId}: {eventId:Id<"events">}) => {
   )
 }
 
-export default CancelEventButton;
+ export default CancelEventButton;

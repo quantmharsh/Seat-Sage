@@ -351,6 +351,7 @@ export const purchaseTicket = mutation(
         handler:async(ctx ,{userId})=>{
             //fetch all events 
             const events=await ctx.db.query("events").filter((q)=>q.eq(q.field("userId") ,userId)).collect();
+            console.log(" Seller events in convex",events)
 
             //for each event , get ticket sales data
             const eventsWithMetrics=await Promise.all(
@@ -375,6 +376,7 @@ export const purchaseTicket = mutation(
                 })
                
             )
+            return eventsWithMetrics;
         }
     })
 

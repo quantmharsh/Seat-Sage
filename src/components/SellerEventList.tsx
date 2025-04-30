@@ -18,6 +18,8 @@ const SellerEventList = (props: Props) => {
   const events:any=useQuery(api.events.getSellerEvents ,{
     userId:user?.id ??"",
   });
+  console.log("Seller Events List")
+  console.log("Events of user",events);
   if(!events)
   {
     return null;
@@ -25,6 +27,8 @@ const SellerEventList = (props: Props) => {
   
   const upcomingEvents = events.filter((e:any) => e.eventDate > Date.now());
   const pastEvents = events.filter((e:any) => e.eventDate <= Date.now());
+  console.log("Upcoming Events" ,upcomingEvents);
+  console.log("Past Events ",pastEvents);
   return (
     <div className='mx-auto space-y-8'>
       {/* Upcoming Events */}
@@ -163,7 +167,7 @@ function SellerEventCard ({
                 </span>
               </div>
               <p className="text-2xl font-semibold text-gray-900">
-                £
+                ₹
                 {event.is_cancelled
                   ? event.metrics.refundedTickets * event.price
                   : event.metrics.revenue}

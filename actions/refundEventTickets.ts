@@ -28,6 +28,8 @@ export async function refundEventTickets({ eventId }: {
         eventId: eventId
     });
     // Process refunds for each ticket
+    // using allSettled instead of all because . all -> returns array if every promise is succedded
+    //allSettled -> returns in both case whether promise is succeded or failed.which is require for refund issue 
     const results = await Promise.allSettled(
         tickets.map(async (ticket) => {
             try {

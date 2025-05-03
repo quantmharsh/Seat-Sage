@@ -5,9 +5,7 @@ import { api } from "../convex/_generated/api";
 import { Id } from "../convex/_generated/dataModel";
 import { stripe } from "@/lib/stripe";
 
-export async function refundEventTickets({ eventId }: {
-    eventId: Id<"events">
-}) {
+export async function refundEventTickets(eventId: Id<"events"> ) {
 
     const convex = getConvexClient();
     // Get event details

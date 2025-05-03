@@ -309,7 +309,10 @@ const EventForm = ({ mode, initialData }: EventFormProps) => {
                                         onChange={(e) => field.onChange(Number(e.target.value))}
                                     />
                                 </FormControl>
-                                <FormMessage />
+                                                
+                                <FormMessage>
+                                  
+                                    </FormMessage>
                             </FormItem>
                         )}
                     />

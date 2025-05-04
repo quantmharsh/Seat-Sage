@@ -18,6 +18,7 @@ import { Textarea } from "./ui/textarea";
 import { Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { error } from "console";
 const formSchema = z.object({
     name: z.string().min(5, "Event name is required"),
     description: z.string().min(10, "Description is required"),
@@ -90,6 +91,8 @@ const EventForm = ({ mode, initialData }: EventFormProps) => {
                 },
                 body: file,
             });
+            
+            toast.success("Image Uploaded Successfully");
             // Step 3: Get the storageId back from Convex
             const { storageId } = await result.json();
             return storageId;
@@ -110,6 +113,8 @@ const EventForm = ({ mode, initialData }: EventFormProps) => {
             reader.onloadend = () => {
                 setImagePreview(reader.result as string);
             }
+          
+            toast.success("Image changed Successfully");
             // starts reading the file content.
             reader.readAsDataURL(file);
         }
@@ -310,9 +315,11 @@ const EventForm = ({ mode, initialData }: EventFormProps) => {
                                     />
                                 </FormControl>
                                                 
+                                {/* {mode === "edit" && 
                                 <FormMessage>
-                                  
-                                    </FormMessage>
+                                    To many tickets !!!
+                                    </FormMessage>} */}
+                                    <FormMessage/>
                             </FormItem>
                         )}
                     />

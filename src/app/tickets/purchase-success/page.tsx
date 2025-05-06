@@ -1,12 +1,12 @@
 
 import { getConvexClient } from '@/lib/convex';
-import { useUser } from '@clerk/nextjs'
+
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import { api } from '../../../../convex/_generated/api';
 import { PartyPopper } from 'lucide-react';
-import { late } from 'zod';
+
 import Ticket from '@/components/Ticket';
 
 

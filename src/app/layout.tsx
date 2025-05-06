@@ -7,7 +7,7 @@ import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import Header from "@/components/Header";
 import SyncUserWithConvex from "@/components/SyncUserWithConvex";
 import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

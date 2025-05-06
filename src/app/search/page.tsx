@@ -41,7 +41,7 @@ const SearchPage = () => {
                 <LucideSearchCode className='w-6 h-6 text-gray-400'/>
                 <div>
                      <h1 className='text-2xl font-bold text-gray-900'>
-                        Search Results for  "{query}"
+                     Search Results for &quot;{query}&quot;
                      </h1>
                      <p className='text-gray-600 mt-1'>
                         Found {searchResults.length} event{searchResults.length>2 ? "s":""}

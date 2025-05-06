@@ -3,11 +3,11 @@
 import { useQuery } from 'convex/react'
 import React from 'react'
 import { api } from '../../convex/_generated/api'
-import { ifError } from 'assert'
+
 import Spinner from './Spinner'
 import { CalendarDays, Ticket } from 'lucide-react'
 import EventCard from './EventCard'
-import { toast } from 'sonner'
+
 
 
 

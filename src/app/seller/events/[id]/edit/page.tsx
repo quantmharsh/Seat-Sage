@@ -18,7 +18,7 @@ const EditEventPage = (props: Props) => {
     return (
         <div className="max-w-3xl mx-auto p-6">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-amber-400 to-amber-600 px-6 py-8 text-white">
+          <div className="bg-gradient-to-r from-amber-400 to-amber-600 px-6 py-8 text-blue-950">
             <h2 className="text-2xl font-bold">Edit Event</h2>
             <p className="text-blue-100 mt-2">Update your event details</p>
           </div>

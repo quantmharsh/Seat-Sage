@@ -66,11 +66,11 @@ const SellerDashboard = (props: Props) => {
     <div className='max-w-3xl mx-auto p-6'>
       <div className='bg-white rounded-lg shadow-lg overflow-hidden'>
         {/* Header Section */}
-        <div className='bg-gradient-to-r from-amber-400 to-amber-600 px-6 py-8 text-black'>
+        <div className='bg-gradient-to-r from-amber-400 to-amber-600 px-6 py-8 text-blue-950'>
           <h2 className='text-2xl font-bold '>
             Seller Dashboard
           </h2>
-          <p className='text-black  font-mono  mt-2'>
+          <p className='text-blue-950  font-medium  mt-2'>
             Manage your seller profile and payment settings
           </p>
         </div>

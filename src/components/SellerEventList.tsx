@@ -15,7 +15,7 @@ import CancelEventButton from './CancelEventButton';
 
 const SellerEventList = () => {
   const {user}=useUser();
-  const events:any=useQuery(api.events.getSellerEvents ,{
+  const events=useQuery(api.events.getSellerEvents ,{
     userId:user?.id ??"",
   });
   console.log("Seller Events List")
@@ -25,8 +25,8 @@ const SellerEventList = () => {
     return null;
   }
   
-  const upcomingEvents = events.filter((e:any) => e.eventDate > Date.now());
-  const pastEvents = events.filter((e:any) => e.eventDate <= Date.now());
+  const upcomingEvents = events.filter((e) => e.eventDate > Date.now());
+  const pastEvents = events.filter((e) => e.eventDate <= Date.now());
   console.log("Upcoming Events" ,upcomingEvents);
   console.log("Past Events ",pastEvents);
   return (
@@ -37,7 +37,7 @@ const SellerEventList = () => {
           Upcoming Events
         </h2>
         <div className='grid grid-cols-1 gap-6'>
-          {upcomingEvents.map((event:any)=>(
+          {upcomingEvents.map((event)=>(
             <SellerEventCard key={event._id} event={event}/>
           ))}
           {upcomingEvents.length=== 0 && (
@@ -52,7 +52,7 @@ const SellerEventList = () => {
         <div>
           <h2 className='text-2xl font-bold text-gray-900 mb-4'>
             <div className='grid grid-cols-1'>
-              {pastEvents.map((event:any)=>(
+              {pastEvents.map((event)=>(
                 <SellerEventCard key={event._id} event={event}/>
               ))}
             </div>

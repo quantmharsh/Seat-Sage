@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Id } from '../../convex/_generated/dataModel'
 import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
-import { useRouter } from 'next/navigation';
 import { refundEventTickets } from '../../actions/refundEventTickets';
 import { toast } from 'sonner';
 import { Ban } from 'lucide-react';
@@ -13,7 +12,7 @@ const CancelEventButton = ({eventId}: {eventId:Id<"events">;}) => {
 
   const[isCancelling ,setIsCancelling]=useState(false);
   const cancelEvent= useMutation(api.events.cancelEvent);
-  const router= useRouter();
+
   const handelCancel=async()=>{
     if(!confirm("Are you sure you want to cancel this event? All tickets will be refunded and the event will be cancelled permanently."))
     {
@@ -33,12 +32,15 @@ const CancelEventButton = ({eventId}: {eventId:Id<"events">;}) => {
       
                               })
     } catch (error) {
+
+
       toast.error('Error',
         {
             description: "Failed to cancel event . Please try again",
             duration: 5000,
 
         })
+        console.error("Error Occured while canceling event" , error);
     }
     finally{
       setIsCancelling(false)

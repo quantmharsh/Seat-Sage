@@ -7,7 +7,7 @@ import { useStorageUrl } from '@/lib/imageUrl';
 import Spinner from './Spinner';
 import Image from 'next/image';
 import QRCode from "react-qr-code";
-import { CalendarDays, IdCard, MapPin, MapPinCheckIcon, TicketIcon, User } from 'lucide-react';
+import { CalendarDays, IdCard,  MapPinCheckIcon, TicketIcon, User } from 'lucide-react';
 
 
 

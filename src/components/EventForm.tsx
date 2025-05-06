@@ -7,10 +7,8 @@ import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useTransition } from "react";
-import { useSonner } from "sonner";
 import { toast } from 'sonner'
 import { useStorageUrl } from "@/lib/imageUrl";
-import { init } from "next/dist/compiled/webpack/webpack";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
@@ -18,7 +16,7 @@ import { Textarea } from "./ui/textarea";
 import { Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { error } from "console";
+
 const formSchema = z.object({
     name: z.string().min(5, "Event name is required"),
     description: z.string().min(10, "Description is required"),

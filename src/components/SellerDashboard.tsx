@@ -46,7 +46,7 @@ const SellerDashboard = () => {
         setAccountStatus(status);
         console.log("Fetched Account Status", status);
       } catch (error) {
-        console.error("Error fetching account status:");
+        console.error("Error fetching account status:" ,error);
       }
     }
   }

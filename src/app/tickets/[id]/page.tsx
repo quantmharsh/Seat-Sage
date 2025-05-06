@@ -12,7 +12,7 @@ import { toPng  , toBlob} from "html-to-image";
 
 
 
-const page = () => {
+const TicketPage = () => {
     const params = useParams();
     const { user } = useUser();
     const ticket = useQuery(api.tickets.getTicketWithDetails, {
@@ -97,6 +97,7 @@ const page = () => {
                         await navigator.clipboard.writeText(window.location.href);
                         alert("Link copied to clipboard!")
                     } catch (error) {
+                        console.error("Error occured",error);
                         alert("Your browser does not support sharing.")
                     }
         }
@@ -195,4 +196,4 @@ const page = () => {
     )
 }
 
-export default page
+export default TicketPage;

@@ -2,7 +2,6 @@ import React from 'react'
 import SearchBar from './SearchBar'
 import Link from 'next/link'
 import Image from 'next/image'
-import logo from "@/images/logo.png";
 import logo1 from "@/images/logo1.png";
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';

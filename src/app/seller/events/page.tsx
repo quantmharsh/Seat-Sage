@@ -4,9 +4,9 @@ import { ArrowLeftFromLine, PlusCircle } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 
-type Props = {}
 
-const SellerEventsPage = (props: Props) => {
+
+const SellerEventsPage = () => {
     
   return (
    <div className='min-h-screen bg-gray-50'>

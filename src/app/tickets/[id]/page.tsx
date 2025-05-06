@@ -10,9 +10,9 @@ import { ArrowLeftCircle, Download, Share2 } from 'lucide-react';
 import Ticket from '@/components/Ticket';
 import { toPng  , toBlob} from "html-to-image";
 
-type Props = {}
 
-const page = (props: Props) => {
+
+const page = () => {
     const params = useParams();
     const { user } = useUser();
     const ticket = useQuery(api.tickets.getTicketWithDetails, {

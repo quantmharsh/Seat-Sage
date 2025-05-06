@@ -7,9 +7,9 @@ import { Id } from '../../../../../../convex/_generated/dataModel';
 import { AlertCircle } from 'lucide-react';
 import EventForm from '@/components/EventForm';
 
-type Props = {}
 
-const EditEventPage = (props: Props) => {
+
+const EditEventPage = () => {
  const params=useParams();
  const event =useQuery(api.events.getById , {
     eventId:params.id  as  Id<"events">,

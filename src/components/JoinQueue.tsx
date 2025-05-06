@@ -11,7 +11,7 @@ import { WAITING_LIST_STATUS } from '../../convex/constants'
 import { Clock, OctagonXIcon } from 'lucide-react'
 
 
-type Props = {}
+
 
 const JoinQueue = ({eventId , userId}:{
     eventId:Id<"events">,

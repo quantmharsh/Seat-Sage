@@ -6,9 +6,9 @@ import { api } from '../../../convex/_generated/api';
 import { TicketSlash, TicketsPlaneIcon } from 'lucide-react';
 import TicketCard from '@/components/TicketCard';
 
-type Props = {}
 
-const MyTicketsPage = (props: Props) => {
+
+const MyTicketsPage = () => {
     const {user}=useUser();
     //get all tickets
     const tickets= useQuery(api.events.getUserTickets,{

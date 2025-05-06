@@ -7,7 +7,7 @@ import { refundEventTickets } from '../../actions/refundEventTickets';
 import { toast } from 'sonner';
 import { Ban } from 'lucide-react';
 
-type Props = {}
+
 
 const CancelEventButton = ({eventId}: {eventId:Id<"events">;}) => {
 

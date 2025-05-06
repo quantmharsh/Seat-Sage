@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { createStripeConnectAccountLink } from '../../../../../actions/createStripeConnectAccountLink';
 import { AlertCircle, Loader2 } from 'lucide-react';
 
-type Props = {}
-//this page will be rendered if user has previously want able to coplete his all requirements or some issue has occured 
-//user will be redirected here from CreateStripeConnectAccountLink
-const Refresh = (props: Props) => {
+
+// this page will be rendered if user has previously want able to coplete his all requirements or some issue has occured 
+// user will be redirected here from CreateStripeConnectAccountLink
+const Refresh = () => {
     const params = useParams();
     const connectedAccountId = params.id as string;
     const [accountLinkCreatePending, setAccountLinkCreatePending] = useState(false);

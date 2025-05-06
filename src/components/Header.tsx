@@ -8,9 +8,9 @@ import logo1 from "@/images/logo1.png";
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import { Button } from './ui/button';
 
-type Props = {}
 
-const Header = (props: Props) => {
+
+const Header = () => {
   return (
     <div className='border-b'>
         <div className=' flex flex-col lg:flex-row items-center gap-4 p-4'>

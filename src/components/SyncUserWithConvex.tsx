@@ -4,9 +4,9 @@ import { useMutation } from 'convex/react';
 import React, { useEffect } from 'react'
 import { api } from '../../convex/_generated/api';
 
-type Props = {}
 
-const SyncUserWithConvex = (props: Props) => {
+
+const SyncUserWithConvex = () => {
 
     const {user}=useUser();
     const updatedUser=useMutation(api.users.updateUser);

@@ -11,9 +11,9 @@ import { Ban, Banknote, CalendarDays, Edit, InfoIcon, Ticket } from 'lucide-reac
 import Link from 'next/link';
 import CancelEventButton from './CancelEventButton';
 
-type Props = {}
 
-const SellerEventList = (props: Props) => {
+
+const SellerEventList = () => {
   const {user}=useUser();
   const events:any=useQuery(api.events.getSellerEvents ,{
     userId:user?.id ??"",

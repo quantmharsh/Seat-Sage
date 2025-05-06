@@ -13,9 +13,9 @@ import { Button } from './ui/button';
 import { createStripeConnectCustomer } from '../../actions/createStripeConnectCustomer';
 import { createStripeConnectAccountLink } from '../../actions/createStripeConnectAccountLink';
 
-type Props = {}
 
-const SellerDashboard = (props: Props) => {
+
+const SellerDashboard = () => {
   const [accountCreatePending, setAccountCreatePending] = useState(false);
   const [accountLinkCreatePending, setAccountLinkCreatePending] = useState(false);
   const [error, setError] = useState(false);

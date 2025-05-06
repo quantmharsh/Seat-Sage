@@ -13,7 +13,7 @@ import EventCard from '@/components/EventCard'
 import { Button } from '@/components/ui/button'
 import JoinQueue from '@/components/JoinQueue'
 
-type Props = {}
+
 
 const EventPage = () => {
 

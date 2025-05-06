@@ -4,7 +4,7 @@ import { useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { XCircle } from 'lucide-react'
 
-type Props = {}
+
 
 const ReleaseTicket = ({eventId , waitingListId}:{
     eventId:Id<"events"> ,

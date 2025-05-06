@@ -3,9 +3,9 @@ import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import React from 'react'
 
-type Props = {}
 
-const  SellerPage = async(props: Props) => {
+
+const  SellerPage = async() => {
   const{userId}=await auth();
   if(!userId)
   {

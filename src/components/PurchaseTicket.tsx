@@ -8,7 +8,7 @@ import { Ticket } from "lucide-react";
 import ReleaseTicket from "./ReleaseTicket";
 import { createStripeCheckoutSession } from "../../actions/createStripeCheckoutSession";
 
-type Props = {};
+
 
 const PurchaseTicket = ({ eventId }: { eventId: Id<"events"> }) => {
 	const router = useRouter();

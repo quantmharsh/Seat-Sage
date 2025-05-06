@@ -9,9 +9,8 @@ import { PartyPopper } from 'lucide-react';
 import { late } from 'zod';
 import Ticket from '@/components/Ticket';
 
-type Props = {}
 
-const TicketSuccess = async(props: Props) => {
+const TicketSuccess = async() => {
     const {userId}=await  auth();
     if(!userId) redirect("/");
 

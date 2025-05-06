@@ -7,9 +7,9 @@ import Spinner from '@/components/Spinner';
 import { LucideSearchCode, SearchX } from 'lucide-react';
 import EventCard from '@/components/EventCard';
 
-type Props = {}
 
-const SearchPage = (props: Props) => {
+
+const SearchPage = () => {
 
     const searchParams= useSearchParams();
     const query= searchParams.get("q")|| "";

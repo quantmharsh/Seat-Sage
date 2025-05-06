@@ -7,7 +7,7 @@ import Spinner from './Spinner';
 import Link from 'next/link';
 import { AlertTriangle, ArrowRight, CalendarDays, Clock, MapPin } from 'lucide-react';
 
-type Props = {}
+
 
 const TicketCard = ({ticketId}: {ticketId:Id<"tickets">}) => {
   //get all details of Ticket

@@ -27,6 +27,7 @@ const SellerDashboard = () => {
   const stripeConnectId = useQuery(api.users.getUsersStripeConnectId, {
     userId: user?.id || "",
   });
+  //check account status
   const isReadyToAcceptPayments = accountStatus?.isActive && accountStatus?.payoutsEnabled;
   useEffect(() => {
 
@@ -38,6 +39,7 @@ const SellerDashboard = () => {
   if (stripeConnectId === undefined) {
     return <Spinner />;
   }
+  //method to fetch account status everytime when component  mounts or stripeConnectId changes 
   const fetchAccountStatus = async () => {
 
     if (stripeConnectId) {

@@ -19,13 +19,13 @@ export const getQueuePosition=query({
             return null;
         }
 
-        //Get Total number of people ahead in  line for ticket booking
+        //Get Total number of people ahead in  line for ticket booking (those who are having tiket offered+ ticket waiting ).Everyone in a queue, 
         const peopleAhead=await ctx.db.query("waitingList").withIndex("by_event_status", (q)=>q.eq("eventId", eventId)).filter((q)=>
         q.and(q.lt(q.field("_creationTime"), entry._creationTime),
     q.or(q.eq(q.field("status") , WAITING_LIST_STATUS.WAITING),
 q.eq(q.field("status"), WAITING_LIST_STATUS.OFFERED)))
         )
-        .collect()
+        .collect()    //calculate total length of collection
         .then((entries)=>entries.length);
 
         return {
@@ -78,7 +78,7 @@ q.eq(q.field("status"), WAITING_LIST_STATUS.OFFERED)))
             (entries) =>
               entries.filter((e) => (e.offerExpiresAt ?? 0) > now).length
           );
-  
+  // Total tickets in event - tickets (valid , used) + tickets( offered)
         return {
           availableSpots: event.totalTickets - (purchasedCount + activeOffers),
         };

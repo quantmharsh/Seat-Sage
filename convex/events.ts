@@ -5,15 +5,15 @@ import RateLimiter, { MINUTE } from "@convex-dev/rate-limiter";
 import { api, components, internal } from "./_generated/api";
 import { RegisteredMutation } from "convex/server";
 import { Id } from "./_generated/dataModel";
-import { processQueue, processQueueImpl } from "./waitingList";
-import { promise } from "zod";
+import {  processQueueImpl } from "./waitingList";
+
 
 
 // Initialize rateLimiter
 const rateLimiter = new RateLimiter(components.rateLimiter, {
     queueJoin: {
         kind: "fixed window",
-        rate: 50,
+        rate: 3,
         period: 30 * MINUTE, //30 minutes 3  request
     }
 })
